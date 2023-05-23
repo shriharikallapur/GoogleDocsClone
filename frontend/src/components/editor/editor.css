@@ -1,0 +1,60 @@
+.ql-toolbar.ql-snow{
+    width: 94%;
+    position: fixed;
+    top: 4.2rem;
+    border: none;
+    display: flex; 
+    margin: auto;
+    justify-content: center;
+    z-index: 1;
+}
+
+.ql-formats {
+    border-left: 1px solid gray;
+}
+
+.ql-formats.ql-clean {
+    border: none;
+}
+
+.ql-header.ql-picker:hover,
+.ql-font.ql-picker:hover,
+.ql-bold:hover,
+.ql-italic:hover,
+.ql-underline:hover,
+.ql-color.ql-picker.ql-color-picker:hover,
+.ql-color:hover,
+.ql-background.ql-picker.ql-color-picker:hover,
+.ql-background:hover,
+.ql-code-block:hover,
+.ql-link:hover,
+.ql-image:hover,
+.ql-list:hover,
+.ql-indent:hover,
+.ql-direction:hover,
+.ql-align.ql-picker.ql-icon-picker:hover,
+.ql-align:hover,
+.ql-clean:hover {
+    border-radius: 0.375rem !important;
+    background-color: #44474614 !important;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: none;
+    margin: 0 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-style: solid;
+    border-color: transparent;
+    border-width: 4px;
+    background-color: #dadce0;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar {
+    height: 16px;
+    overflow: visible;
+    width: 10px;
+}
