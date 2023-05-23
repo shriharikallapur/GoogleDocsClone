@@ -36,64 +36,6 @@ icons['clean'] = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   </svg>`;
 
 export const Editor = () => {
-  const {id: docId} = useParams()
-  const [socket, setSocket] = useState()
-  const [quill, setQuill] = useState()
-  console.log(docId)
-
-  useEffect(() => {
-    const s = io('http://localhost:3001');
-    setSocket(s)
-    return () => {
-      s.disconnect();
-    }
-  }, []);
-
-  useEffect(() => {
-    if(socket == null || quill == null) return
-
-    const handler = delta => {
-      quill.updateContents(delta)
-    }
-    socket.on("receive-changes", handler)
-    
-    return () => {
-      socket.off("receive-changes", handler)
-    }
-  }, [socket, quill])
-
-  useEffect(() => {
-    if(socket == null || quill == null) return
-
-    const handler = (delta, oldDelt, source) => {
-      if(source !== 'user') return
-      socket.emit("send-changes", delta)
-    }
-    quill.on('text-change', handler)
-    
-    return () => {
-      quill.off('text-change', handler)
-    }
-  }, [socket, quill])
-
-  useEffect(() => {
-    if(socket == null || quill == null) return
-    socket.once("load-document", document => {
-      quill.setContents(document)
-      quill.enable()
-    })
-    socket.emit("get-document", docId)
-  }, [socket, quill, docId])
-
-  useEffect(() => {
-    if(socket == null || quill == null) return
-    const interval = setInterval(() => {
-      socket.emit('save-document', quill.getContents())
-    }, SAVE_INTERVAL_MS)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [socket, quill])
 
   const wrapperRef = useCallback(wrapper => {
     if(wrapper == null) return
@@ -107,9 +49,6 @@ export const Editor = () => {
       placeholder: 'Type @ to insert',
       theme: 'snow',
     });
-    q.disable()
-    q.setText('Loading...')
-    setQuill(q);
   }, []);
 
   const initialpoint = {
