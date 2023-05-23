@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 const Document = require("./document")
+require("dotenv").config();
 
-mongoose.connect('mongodb+srv://shriharikallapur369:GoogleDocsClone@cluster0.hd4cbjz.mongodb.net/GdocsCloneDB').then(() => console.log('Connected!')).catch((error) => console.log(error.message))
+console.log(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL).then(() => console.log('Connected!')).catch((error) => console.log(error.message))
 
 const io = require("socket.io")(3001, {
     cors: {
